@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  </head>
+
+  <body>
+    <h1>進数変換</h1>
+
+    <a href=index.htm>Homeにもどる</a><br>
+
+    <p></p>
+
+    <label>変換前の基数
+      <select id="before">
+          <option value="2">2</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="16">16</option>
+      </select>
+    </label>
+
+    <p></p>
+
+    <label>変換後の基数
+      <select id="after">
+          <option value="2">2</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="16">16</option>
+      </select>
+    </label>
+
+    <p></p>
+
+    <p>変換するもの<br>
+    <textarea id="value" cols="100" rows="20"></textarea>
+    </p>
+
+    <p></p>
+
+    <button py-click="clicked()" id="button">変換</button>
+
+    <div id="text"></div>
+
+    <py-script>
+def clicked():
+    before = int(js.document.getElementById("before").value)
+    val_1 = js.document.getElementById("value").value
+    after = int(js.document.getElementById("after").value)
+
+    val_2 = val_1.split()
+
+    ans_2 = ''
+    ans_3 = []
+
+    for val in val_2:
+        ans_1 = int(val,before)
+
+        if after == 2:
+            ans_2 = format(ans_1,'b')
+        elif after == 8:
+            ans_2 = format(ans_1,'o')
+        elif after == 16:
+            ans_2 = format(ans_1,'x')
+        elif after == 10:
+            ans_2 = ans_1
+
+        ans_3.append(ans_2)
+
+    ans_3 = [str(i) for i in ans_3]
+    Element("text").write(" ".join(ans_3))
+    </py-script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  </head>
+
+  <body>
+    <h1>替字変換（通常モード）</h1>
+
+    <a href=index.htm>Homeにもどる</a><br>
+
+    <p></p>
+
+    <p>変換するもの<br>
+    <textarea id="before_value" cols="100" rows="10"></textarea>
+    </p>
+
+    <p></p>
+
+    <p>条件（変換前(→)変換後 変換前(→)変換後 ...）<br>
+    <textarea id="condition_value_1" cols="100" rows="10"></textarea>
+    </p>
+
+    <p>区切り（→など）<br>
+    <Input type="Input" id="punctuation_value" value="→">
+    </p>
+
+    <p></p>
+
+    <button py-click="convert()" id="button">変換</button>
+
+    <div id="text"></div>
+
+    <py-script>
+def convert():
+    before = js.document.getElementById("before_value").value
+    condition_1 = js.document.getElementById("condition_value_1").value
+    punctuation = js.document.getElementById("punctuation_value").value
+    after = ''
+
+    condition_before = []
+    condition_after = []
+
+    condition_2 = condition_1.split()
+
+    condition_3 = []
+    for condition in condition_2:
+        condition_3.append(condition.split(punctuation))
+
+    for i in range(len(condition_3)):
+        condition_before.append(condition_3[i][0])
+        condition_after.append(condition_3[i][1])
+
+    ind = 0
+    while True:
+        isMatch = False
+        for (x,y) in zip(condition_before, condition_after):
+            char = before.find(x, ind)
+            if char == ind:
+                after = after + y
+                ind = ind + len(x)
+                isMatch = True
+                break
+        if not(isMatch):
+            after = after + before[ind]
+            ind = ind + 1
+        if ind >= len(before):
+            break
+
+    Element("text").write(after)
+    </py-script>
+  </body>
+</html>
