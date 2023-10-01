@@ -39,17 +39,20 @@ def convert():
     before = js.document.getElementById("before_value").value
     after = ''
 
-    condition_before = []
-    condition_after = []
+    condition_before_1 = []
+    condition_after_1 = []
+    condition_before_2 = []
+    condition_after_2 = []
 
-
-    condition_before = list(js.document.getElementById("condition_value_2").value)
-    condition_after = list(js.document.getElementById("condition_value_3").value)
+    condition_before_1 = js.document.getElementById("condition_value_2").value
+    condition_after_1 = js.document.getElementById("condition_value_3").value
+    condition_before_2 = condition_before_1.split()
+    condition_after_2 = condition_after_1.split()
 
     ind = 0
     while True:
         isMatch = False
-        for (x,y) in zip(condition_before, condition_after):
+        for (x,y) in zip(condition_before_2, condition_after_2):
             char = before.find(x, ind)
             if char == ind:
                 after = after + y
