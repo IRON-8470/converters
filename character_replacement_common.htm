@@ -24,8 +24,12 @@
     <textarea id="condition_value_1" cols="100" rows="10"></textarea>
     </p>
 
-    <p>区切り（→など）<br>
-    <Input type="Input" id="punctuation_value" value="→">
+    <p>変換前後の区切り（→など）<br>
+    <Input type="Input" id="punctuation_value_1" value="→">
+    </p>
+
+	<p>変換条件の区切り（半角スペースなど）<br>
+    <Input type="Input" id="punctuxxxation_value_2" value=" ">
     </p>
 
     <p></p>
@@ -38,17 +42,18 @@
 def convert():
     before = js.document.getElementById("before_value").value
     condition_1 = js.document.getElementById("condition_value_1").value
-    punctuation = js.document.getElementById("punctuation_value").value
+    punctuation_1 = js.document.getElementById("punctuation_value_1").value
+	punctuation_2 = js.document.getElementById("punctuation_value_2").value
     after = ''
 
     condition_before = []
     condition_after = []
 
-    condition_2 = condition_1.split()
+    condition_2 = condition_1.split(punctuation_2)
 
     condition_3 = []
     for condition in condition_2:
-        condition_3.append(condition.split(punctuation))
+        condition_3.append(condition.split(punctuation_1))
 
     for i in range(len(condition_3)):
         condition_before.append(condition_3[i][0])
