@@ -50,9 +50,14 @@
 def clicked():
     from js import document
 
+    # 入力取得
     before = int(document.getElementById("before").value)
     val_1 = document.getElementById("value").value.strip()
     after = int(document.getElementById("after").value)
+
+    if not val_1:
+        Element("text").write("エラー: 入力が空です")
+        return
 
     val_2 = val_1.split()
     ans_3 = []
@@ -76,7 +81,7 @@ def clicked():
         ans_3.append(ans_2)
 
     result_text = " ".join(ans_3)
-    Element("text").element.innerHTML = result_text
+    Element("text").write(result_text)
     </py-script>
   </body>
 </html>
